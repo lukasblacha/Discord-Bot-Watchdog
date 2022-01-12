@@ -107,14 +107,21 @@ if __name__ == '__main__':
 
     @slash.slash(name="watchbot", description="Shows the available WatchBot commands", options=[
         create_option(
-            name="farbe",
+            name="obervation",
             description="Gib deinem Team eine Farbe",
-            option_type=6,
-            required=True,
-            choices=[
-                create_choice(
-                    name="Smaragt Grün",
-                    value="0x1abc9c")
+            option_type=1,
+            required=False,
+            options=[
+                create_option(
+                    name="watch",
+                    description="Gib deinem Team eine Farbe",
+                    option_type=6,
+                    required=True),
+                create_option(
+                    name="unwatch",
+                    description="Gib deinem Team eine Farbe",
+                    option_type=6,
+                    required=True)
             ]
         )
     ]
