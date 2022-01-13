@@ -25,7 +25,7 @@ if not os.path.exists(CONFIG_FILE):
     config.add_section("Settings")
     config.set("Settings", "TOKEN", "")
     config.set("Settings", "BOT_PREFIX", "!")
-    config.set("Settings", "OWNER_ID", "150933142482452480")
+    config.set("Settings", "OWNER_ID", "")
     config.add_section("Subscribers")
     config.set("Subscribers", "USERs", "")
     config.add_section("Observed")
@@ -74,7 +74,6 @@ class NOTIFY:
 if __name__ == '__main__':
     client = commands.Bot(command_prefix=BOT_PREFIX, intents=discord.Intents.all(), case_insensitive=True,
                           owner_id=OWNER_ID)
-    #slash = SlashCommand(client, sync_commands=True)
 
 
     @client.event
@@ -87,7 +86,6 @@ if __name__ == '__main__':
         print(
             f"https://discord.com/api/oauth2/authorize?client_id={client.user.id}&permissions=261993005047&scope=bot%20applications.commands")
         print("--------------------------------------------------")
-        game = discord.Game("/help")
         await client.change_presence(status=discord.Status.offline)
 
     @client.event
