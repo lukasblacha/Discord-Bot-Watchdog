@@ -1,7 +1,7 @@
 # Discord-Bot-Watchdog
 **A Discord Bot that can warn a User via DM if a overwatched Bot goes offline**
 
-###Featurelist
+### Featurelist
 
 - [x] Distinguish between bot users and normal users
 - [x] Notify multiple users possible
@@ -32,4 +32,4 @@ bots = 000000000000000000 000000000000000000 000000000000000000
 
 ### Future plans
 Revision of the code, because the development of the library "discord.py" ended on 28th August 2021...
-Revision of the code with Nextcord, a fork of discord.py
+Rewrite of the code with Nextcord, a fork of discord.py
