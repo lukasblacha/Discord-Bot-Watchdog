@@ -28,6 +28,7 @@ if not os.path.exists(CONFIG_FILE):
     config.set("Settings", "OWNER_ID", "")
     config.add_section("Subscribers")
     config.set("Subscribers", "USERs", "")
+    config.set("Subscribers", "CHANNELs", "")
     config.add_section("Observed")
     config.set("Observed", "BOTs", "")
     file = open(CONFIG_FILE, 'w')
@@ -35,7 +36,6 @@ if not os.path.exists(CONFIG_FILE):
     file.close()
 else:
     print("All Direcories and Files in place!\nContinuing")
-
 
 config.read(CONFIG_FILE)
 BOT_PREFIX = config.get('Settings', 'BOT_PREFIX')
@@ -48,11 +48,20 @@ else:
     BOT_PREFIX = config.get("Settings", "BOT_PREFIX")
     OWNER_ID = config.get("Settings", "OWNER_ID")
     USERS = config.get("Subscribers", "USERs").split()
+    CHANNELS = config.get("Subscribers", "CHANNELs").split()
     BOTS = config.get("Observed", "BOTs").split()
+
+print(TOKEN)
+print(BOT_PREFIX)
+print(OWNER_ID)
+print(USERS)
+print(CHANNELS)
+print(BOTS)
 
 ##### COLORS #####
 RED = 0xe91e63
 GREEN = 0x2ecc71
+
 
 class NOTIFY:
     async def notify_user(user_id: int, title: str, name: str, content: str, colour: int, thumbnail: str):
@@ -63,12 +72,14 @@ class NOTIFY:
         embed.timestamp = datetime.datetime.utcnow()
         await user.send(embed=embed)
 
-    async def notify_announcement_channel(channel_id: int, title: str, content: str):
+    async def notify_channel(channel_id: int, title: str, name: str, content: str, colour: int, thumbnail: str):
         notify_announcement_channel = client.get_channel(channel_id)
-        embed = discord.Embed(title="Update 🔔", colour=0xff0000)
-        embed.add_field(name=title, value=content, inline=True)
+        embed = discord.Embed(title=title, colour=colour)
+        embed.add_field(name=name, value=content, inline=True)
+        embed.set_thumbnail(url=thumbnail)
         embed.timestamp = datetime.datetime.utcnow()
         await notify_announcement_channel.send(embed=embed)
+
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
@@ -88,30 +99,52 @@ if __name__ == '__main__':
         print("--------------------------------------------------")
         await client.change_presence(status=discord.Status.offline)
 
+
     @client.event
     async def on_member_update(before, after):
-        if before.bot == True:
-            print("MEMBER UPDATE")
-            print(f"{datetime.datetime.utcnow()} - Status-ÄNDERUNG \nUser: {before} Status: {before.status} --> User: {after} Status: {after.status}")
-            for filter_user in BOTS:
-                if int(filter_user) == before.id:
-                    if str(after.status) == "offline":
-                        for i in USERS:
-                            await NOTIFY.notify_user(int(i), "‼️ STATUS NOTIFICATION ‼️", f"User: {after}",
-                                                    f"**Status: *{after.status}***", RED, before.avatar_url)
-                    elif str(after.status) == "online":
-                        pass
-                        """
-                        await NOTIFY.notify_user(150933142482452480, "🔔 STATUS NOTIFICATION 🔔", f"User: {after}",
-                                                 f"**Status: *{after.status}***",
-                                                 GREEN, before.avatar_url)
-                        """
-
+        if before.status == after.status:
+            pass
+        else:
+            if before.bot == True:
+                print("MEMBER UPDATE")
+                print(
+                    f"{datetime.datetime.utcnow()} - Status-ÄNDERUNG \nUser: {before} Status: {before.status} --> User: {after} Status: {after.status}")
+                for filter_user in BOTS:
+                    if int(filter_user) == before.id:
+                        if str(after.status) == "offline":
+                            if len(USERS) == 0:
+                                pass
+                            else:
+                                for offuser in USERS:
+                                    await NOTIFY.notify_user(int(offuser), "‼️ STATUS NOTIFICATION ‼️",
+                                                             f"User: {after}",
+                                                             f"**Status: *{after.status}***", RED, before.avatar_url)
+                            if len(CHANNELS) == 0:
+                                pass
+                            else:
+                                for offchannel in CHANNELS:
+                                    await NOTIFY.notify_channel(int(offchannel), "‼️ STATUS NOTIFICATION ‼️",
+                                                                f"User: {after}",
+                                                                f"**Status: *{after.status}***", RED, before.avatar_url)
+                        elif str(after.status) == "online":
+                            if len(USERS) == 0:
+                                pass
+                            else:
+                                for onuser in USERS:
+                                    await NOTIFY.notify_user(int(onuser), "🔔 STATUS NOTIFICATION 🔔", f"User: {after}",
+                                                             f"**Status: *{after.status}***", GREEN, before.avatar_url)
+                            if len(CHANNELS) == 0:
+                                pass
+                            else:
+                                for onchannel in CHANNELS:
+                                    await NOTIFY.notify_channel(int(onchannel), "🔔 STATUS NOTIFICATION 🔔",
+                                                                f"User: {after}",
+                                                                f"**Status: *{after.status}***", GREEN, before.avatar_url)
+                        else:
+                            pass
                     else:
                         pass
-                else:
-                    pass
-        else:
-            pass
+            else:
+                pass
 
 client.run(TOKEN)
