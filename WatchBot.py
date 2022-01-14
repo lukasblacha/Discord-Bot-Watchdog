@@ -108,31 +108,43 @@ if __name__ == '__main__':
                             if len(USERS) == 0:
                                 pass
                             else:
-                                for offuser in USERS:
-                                    await NOTIFY.notify_user(int(offuser), "‼️ STATUS NOTIFICATION ‼️",
-                                                             f"User: {after}",
-                                                             f"**Status: *{after.status}***", RED, before.avatar_url)
+                                try:
+                                    for offuser in USERS:
+                                        await NOTIFY.notify_user(int(offuser), "‼️ STATUS NOTIFICATION ‼️",
+                                                                 f"User: {after}",
+                                                                 f"**Status: *{after.status}***", RED, before.avatar_url)
+                                except:
+                                    print("Error while sending message to user")
                             if len(CHANNELS) == 0:
                                 pass
                             else:
-                                for offchannel in CHANNELS:
-                                    await NOTIFY.notify_channel(int(offchannel), "‼️ STATUS NOTIFICATION ‼️",
-                                                                f"User: {after}",
-                                                                f"**Status: *{after.status}***", RED, before.avatar_url)
+                                try:
+                                    for offchannel in CHANNELS:
+                                        await NOTIFY.notify_channel(int(offchannel), "‼️ STATUS NOTIFICATION ‼️",
+                                                                    f"User: {after}",
+                                                                    f"**Status: *{after.status}***", RED, before.avatar_url)
+                                except:
+                                    print("Error while sending message to channel")
                         elif str(after.status) == "online":
                             if len(USERS) == 0:
                                 pass
                             else:
-                                for onuser in USERS:
-                                    await NOTIFY.notify_user(int(onuser), "🔔 STATUS NOTIFICATION 🔔", f"User: {after}",
-                                                             f"**Status: *{after.status}***", GREEN, before.avatar_url)
+                                try:
+                                    for onuser in USERS:
+                                        await NOTIFY.notify_user(int(onuser), "🔔 STATUS NOTIFICATION 🔔", f"User: {after}",
+                                                                 f"**Status: *{after.status}***", GREEN, before.avatar_url)
+                                except:
+                                    print("Error while sending message to user")
                             if len(CHANNELS) == 0:
                                 pass
                             else:
-                                for onchannel in CHANNELS:
-                                    await NOTIFY.notify_channel(int(onchannel), "🔔 STATUS NOTIFICATION 🔔",
-                                                                f"User: {after}",
-                                                                f"**Status: *{after.status}***", GREEN, before.avatar_url)
+                                try:
+                                    for onchannel in CHANNELS:
+                                        await NOTIFY.notify_channel(int(onchannel), "🔔 STATUS NOTIFICATION 🔔",
+                                                                    f"User: {after}",
+                                                                    f"**Status: *{after.status}***", GREEN, before.avatar_url)
+                                except:
+                                    print("Error while sending message to channel")
                         else:
                             pass
                     else:
