@@ -1,5 +1,5 @@
 # Discord-Bot-Watchdog
-**A Discord Bot that can warn a User via DM if a overwatched Bot goes offline**
+**A dead simple *-*selfhosted*-* Discord Bot that can warn a User via DM if a overwatched Bot goes offline**
 
 ### Featurelist
 
