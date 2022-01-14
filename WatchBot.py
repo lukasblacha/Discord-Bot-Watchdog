@@ -51,13 +51,6 @@ else:
     CHANNELS = config.get("Subscribers", "CHANNELs").split()
     BOTS = config.get("Observed", "BOTs").split()
 
-print(TOKEN)
-print(BOT_PREFIX)
-print(OWNER_ID)
-print(USERS)
-print(CHANNELS)
-print(BOTS)
-
 ##### COLORS #####
 RED = 0xe91e63
 GREEN = 0x2ecc71
