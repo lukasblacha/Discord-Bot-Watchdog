@@ -101,7 +101,7 @@ if __name__ == '__main__':
             if before.bot == True:
                 print("MEMBER UPDATE")
                 print(
-                    f"{datetime.datetime.utcnow()} - Status-ÄNDERUNG \nUser: {before} Status: {before.status} --> User: {after} Status: {after.status}")
+                    f"{datetime.datetime.utcnow()} - Status-CHANGE \nUser: {before} Status: {before.status} --> User: {after} Status: {after.status}")
                 for filter_user in BOTS:
                     if int(filter_user) == before.id:
                         if str(after.status) == "offline":
