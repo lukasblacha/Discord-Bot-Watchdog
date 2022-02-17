@@ -5,6 +5,7 @@
 
 import discord
 from discord.ext import commands
+from discord.utils import get
 import configparser
 import os
 import datetime
@@ -184,5 +185,15 @@ if __name__ == '__main__':
         reaction = await ctx.send("\n\n**Good Bye...**")
         await reaction.add_reaction("👋")
         await client.close()
+
+
+    @client.command()
+    @commands.is_owner()
+    async def watching(ctx):
+        watching_str = ""
+        for x in BOTS:
+            usr_obj = get(client.get_user(x))
+            watching_str + "\n" + usr_obj.name
+        await ctx.send(f"**Watching**\n{watching_str}")
 
 client.run(TOKEN)
