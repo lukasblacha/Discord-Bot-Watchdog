@@ -111,7 +111,8 @@ if __name__ == '__main__':
         print(
             f"https://discord.com/api/oauth2/authorize?client_id={client.user.id}&permissions=261993005047&scope=bot%20applications.commands")
         print("--------------------------------------------------")
-        await client.change_presence(status=discord.Status.offline)
+        game = discord.Game(f"Watching {len(BOTS)} Bots")
+        await client.change_presence(status=discord.Status.online, activity=game)
         for online_msg in CHANNELS:
             await NOTIFY.notify_channel(int(online_msg), "‼️ STATUS NOTIFICATION ‼️",
                                     f"**{client.user.name}**",
