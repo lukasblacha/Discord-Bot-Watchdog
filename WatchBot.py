@@ -199,7 +199,7 @@ if __name__ == '__main__':
             print(x)
             usr_obj = discord.utils.get(ctx.guild.members, id=int(x))
             print(usr_obj.name)
-            watching_str + f"\n{usr_obj.name}"
+            watching_str += f"\n{usr_obj.name}"
             print(watching_str)
         await ctx.send(f"**Watching**\n{watching_str}")
 
