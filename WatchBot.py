@@ -1,15 +1,29 @@
+# --------------------------------------------------------------------------------------#
+#                                       IMPORTS
+# --------------------------------------------------------------------------------------#
+
+
 import discord
 from discord.ext import commands
 import configparser
 import os
 import datetime
+import asyncio
+
+
+# --------------------------------------------------------------------------------------#
+#                                       VARIABLES
+# --------------------------------------------------------------------------------------#
+
 
 version = 0.1
-print('##########################')
-print('# Discord WatchBot       #')
-print(f'# Version {version}            #')
-print('##########################')
-print('\n')
+banner: str = f'''
+    ##################################################
+    # {version}                                         #
+    #               Discord Watch Bot                #
+    #               By lukas__bca#1001               #
+    ##################################################
+    '''
 
 CONFIG_DIR = "config"
 DB_FILE = "./config/DATABASE.db"
@@ -72,6 +86,11 @@ class NOTIFY:
         embed.set_thumbnail(url=thumbnail)
         embed.timestamp = datetime.datetime.utcnow()
         await notify_announcement_channel.send(embed=embed)
+
+
+# --------------------------------------------------------------------------------------#
+#                                       BOT DOWN HERE
+# --------------------------------------------------------------------------------------#
 
 
 # Press the green button in the gutter to run the script.
@@ -151,5 +170,17 @@ if __name__ == '__main__':
                         pass
             else:
                 pass
+
+
+    @client.command()
+    @commands.is_owner()
+    async def shutdown(ctx):
+        shutdown_msg = ctx.message
+        await shutdown_msg.delete()
+        async with ctx.channel.typing():
+            await asyncio.sleep(1.5)
+        reaction = await ctx.send("\n\n**Good Bye...**")
+        await reaction.add_reaction("👋")
+        await client.close()
 
 client.run(TOKEN)
