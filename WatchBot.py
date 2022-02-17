@@ -196,7 +196,8 @@ if __name__ == '__main__':
     async def watching(ctx):
         watching_str = ""
         for x in BOTS:
-            usr_obj = get(client.get_user(x))
+            print(x)
+            usr_obj = discord.utils.get(client.get_user(int(x)))
             watching_str + "\n" + usr_obj.name
         await ctx.send(f"**Watching**\n{watching_str}")
 
