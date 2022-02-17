@@ -198,7 +198,8 @@ if __name__ == '__main__':
         for x in BOTS:
             print(x)
             usr_obj = discord.utils.get(ctx.guild.members, id=int(x))
-            watching_str + "\n" + usr_obj.name
+            watching_str + f"\n{usr_obj.name}"
+            print(watching_str)
         await ctx.send(f"**Watching**\n{watching_str}")
 
 client.run(TOKEN)
