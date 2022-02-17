@@ -101,6 +101,8 @@ if __name__ == '__main__':
 
     @client.event
     async def on_ready():
+        print(banner)
+        print("\n")
         print("Successfully logged in as {0.user}".format(client))
         print(f"Discord.py version: {discord.__version__}")
         print(f"Name: {client.user.name}")
