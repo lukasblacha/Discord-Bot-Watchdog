@@ -5,7 +5,6 @@
 
 import discord
 from discord.ext import commands
-from discord.utils import get
 import configparser
 import os
 import datetime
@@ -20,7 +19,7 @@ import asyncio
 version = 0.1
 banner: str = f'''
     ##################################################
-    # {version}                                         #
+    # {version}                                            #
     #               Discord Watch Bot                #
     #               By lukas__bca#1001               #
     ##################################################
@@ -195,9 +194,11 @@ if __name__ == '__main__':
     @commands.is_owner()
     async def watching(ctx):
         watching_str = ""
+        i = 1
         for x in BOTS:
             usr_obj = discord.utils.get(ctx.guild.members, id=int(x))
-            watching_str += f"_{usr_obj.name}_\n"
+            watching_str += f"**{i}** _{usr_obj.name}_\n"
+            i += 1
         await ctx.send(f"**Watching**\n{watching_str}")
 
 client.run(TOKEN)
