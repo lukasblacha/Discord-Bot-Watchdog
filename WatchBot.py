@@ -197,7 +197,7 @@ if __name__ == '__main__':
         watching_str = ""
         for x in BOTS:
             print(x)
-            usr_obj = discord.utils.get(client.get_user(int(x)))
+            usr_obj = discord.utils.get(ctx.guild.members, id=int(x))
             watching_str + "\n" + usr_obj.name
         await ctx.send(f"**Watching**\n{watching_str}")
 
