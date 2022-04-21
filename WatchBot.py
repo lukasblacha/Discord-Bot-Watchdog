@@ -16,10 +16,10 @@ import asyncio
 # --------------------------------------------------------------------------------------#
 
 
-version = 0.1
+version = 0.2
 banner: str = f'''
     ##################################################
-    # {version}                                            #
+    # Ver. {version}                                       #
     #               Discord Watch Bot                #
     #               By lukas__bca#1001               #
     ##################################################
@@ -120,7 +120,7 @@ if __name__ == '__main__':
 
 
     @client.event
-    async def on_member_update(before, after):
+    async def on_presence_update(before, after):
         if before.status == after.status:
             pass
         else:
@@ -138,9 +138,9 @@ if __name__ == '__main__':
                                     for offuser in USERS:
                                         await NOTIFY.notify_user(int(offuser), "‼️ STATUS NOTIFICATION ‼️",
                                                                  f"User: {after}",
-                                                                 f"**Status: *{after.status}***", RED, before.avatar_url)
-                                except:
-                                    print("Error while sending message to user")
+                                                                 f"**Status: *{after.status}***", RED, before.avatar)
+                                except Exception as err:
+                                    print(f"Error while sending message to user {err}")
                             if len(CHANNELS) == 0:
                                 pass
                             else:
@@ -148,9 +148,9 @@ if __name__ == '__main__':
                                     for offchannel in CHANNELS:
                                         await NOTIFY.notify_channel(int(offchannel), "‼️ STATUS NOTIFICATION ‼️",
                                                                     f"User: {after}",
-                                                                    f"**Status: *{after.status}***", RED, before.avatar_url)
-                                except:
-                                    print("Error while sending message to channel")
+                                                                    f"**Status: *{after.status}***", RED, before.avatar)
+                                except Exception as err:
+                                    print(f"Error while sending message to channel {err}")
                         elif str(after.status) == "online":
                             if len(USERS) == 0:
                                 pass
@@ -158,9 +158,9 @@ if __name__ == '__main__':
                                 try:
                                     for onuser in USERS:
                                         await NOTIFY.notify_user(int(onuser), "🔔 STATUS NOTIFICATION 🔔", f"User: {after}",
-                                                                 f"**Status: *{after.status}***", GREEN, before.avatar_url)
-                                except:
-                                    print("Error while sending message to user")
+                                                                 f"**Status: *{after.status}***", GREEN, before.avatar)
+                                except Exception as err:
+                                    print(f"Error while sending message to user {err}")
                             if len(CHANNELS) == 0:
                                 pass
                             else:
@@ -168,9 +168,9 @@ if __name__ == '__main__':
                                     for onchannel in CHANNELS:
                                         await NOTIFY.notify_channel(int(onchannel), "🔔 STATUS NOTIFICATION 🔔",
                                                                     f"User: {after}",
-                                                                    f"**Status: *{after.status}***", GREEN, before.avatar_url)
-                                except:
-                                    print("Error while sending message to channel")
+                                                                    f"**Status: *{after.status}***", GREEN, before.avatar)
+                                except Exception as err:
+                                    print(f"Error while sending message to channel {err}")
                         else:
                             pass
                     else:
